@@ -1,6 +1,6 @@
-FROM node:20-alpine3.19 as base
+FROM node:20-alpine3.19 AS base
 
-FROM base as builder
+FROM base AS builder
 WORKDIR /home/app
 
 COPY package*.json .
@@ -12,11 +12,9 @@ COPY src/ src/
 
 RUN npm run build
 
-CMD [ "npm","start" ]
+# runner stage 2
 
-#runner stage 2
-
-FROM base as runner
+FROM base AS runner
 
 WORKDIR /home/app
 
@@ -24,5 +22,10 @@ COPY --from=builder /home/app/dist dist/
 COPY --from=builder /home/app/package*.json ./
 
 RUN npm install --omit=dev
+
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system -u 1001 nodejs
+
+USER nodejs
 
 CMD [ "npm","start" ]
