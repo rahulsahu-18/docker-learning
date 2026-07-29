@@ -1,6 +1,3 @@
-# 🐳 Docker Learning Notes
-
-This project is created to understand the fundamental concepts of **Docker and Docker Compose** by running a TypeScript backend, PostgreSQL, and Redis together.
 
 ## Architecture
 
