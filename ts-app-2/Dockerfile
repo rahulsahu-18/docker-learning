@@ -27,4 +27,8 @@ RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system -u 1001 nodejs
 
 USER nodejs
+
+EXPOSE 8000
+ENV PORT=8000
+
 CMD [ "npm","start" ]
